@@ -32,3 +32,18 @@ for i in [500, 100, 50, 10, 5, 1]:
     result = result + money // i
     money = money % i
 print(result)
+
+###백준 캠핑 (4796)
+index = 0
+
+while True:
+    index += 1
+    L, P, V = map(int, input().split())
+    if L==0 and P==0 and V==0:
+        break
+    times   = V // P    #횟수
+    left    = V % P     #남은 시간
+    if L < left:        #중요한 부분!! 큰걸 먼저 처리하고, 다음으로 작은걸 처리한다
+        left = L        #최적의 해를 구하기 위한 과정 (캠핑을 더 갈 수 있으면, 더 가는 것이 최적의 해)
+    days = L * times + left
+    print("Case %d: %d" %(index, days))
