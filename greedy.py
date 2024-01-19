@@ -47,3 +47,25 @@ while True:
         left = L        #최적의 해를 구하기 위한 과정 (캠핑을 더 갈 수 있으면, 더 가는 것이 최적의 해)
     days = L * times + left
     print("Case %d: %d" %(index, days))
+
+###백준 설탕배달 (2839)
+#허용해야 되는 케이스
+#3의 배수 6, 9, 12, (15)
+#3의 배수 + 5의 배수인 경우 11,(14),17,31
+#작은 것을 먼저 제거하고, 큰 것을 택하는 방법
+
+num     = int(input())
+n_bag   = 0
+
+while num >= 0:
+    if num % 5 == 0:
+        print(n_bag + num//5)
+        break
+    num -= 3    #만약 여기서 0보다 작아지면, while 조건 탈출하기 때문에, num>=0으로 설정해야 한다.
+    n_bag += 1
+
+    #if num % 5 == 0: #num>0으로 하면 한번 더 실행 해야한다.
+    #    print(n_bag + num//5)
+    #    break
+
+else: print(-1) #while-else 사용해도 된다
