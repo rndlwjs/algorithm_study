@@ -69,3 +69,22 @@ while num >= 0:
     #    break
 
 else: print(-1) #while-else 사용해도 된다
+
+###백준 동전0 (11047)
+
+total, money = map(int,(input().split()))
+
+coins = []
+result = 0
+for _ in range(total):
+    coins.append(int(input()))
+
+coins = sorted(coins, reverse=True)
+
+for i in coins:		#배수라는 조건이 있기 때문에 사용가능함
+    if i <= money:
+        result = result + money // i
+        money = money % i
+    else: continue	#coin이 더 큰 경우는 다음 인덱스로 넘어감
+
+print(result)
