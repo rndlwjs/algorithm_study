@@ -88,3 +88,27 @@ for i in coins:		#배수라는 조건이 있기 때문에 사용가능함
     else: continue	#coin이 더 큰 경우는 다음 인덱스로 넘어감
 
 print(result)
+
+###백준 회의실배정 (1931)
+import sys
+
+N = int(sys.stdin.readline())
+
+time = [[0]*2 for _ in range(N)]			#https://suri78.tistory.com/26
+for i in range(N):
+    s, e = map(int, sys.stdin.readline().split())	#input()은 prompt message 출력, 개행 문자 삭제 단계가 포함되어 있기에, sys 사용한 방법이 더 빠르다.
+    time[i][0] = s
+    time[i][1] = e
+
+time.sort(key=lambda x: x[0])				#(우선적으로 시작시간을 기준으로 정렬한다)
+time.sort(key=lambda x: x[1])				#(최종적으로 종료시간을 기준으로 정렬한다)
+							#time.sort(key=lambda x: (x[1],x[0])) 이렇게 자리를 바꿔서 고려해도 편한다.
+end_time = time[0][1]					#이미 정렬되어 있기 때문에 첫번째 회의를 선택한다
+ans = 1
+
+for i in range(1, len(time)):
+    if time[i][0] >= end_time:	#끝나는 시간이 더 늦으면 배치할 수 있다
+        end_time = time[i][1]
+        ans += 1
+
+print(ans)
