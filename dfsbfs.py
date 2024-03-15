@@ -34,7 +34,7 @@ for i in range(m):
 #결과 출력
 print(dfs(1)-1)
 
-###백준 유기농 배추 (1212) 인프런 강의 참고
+###백준 유기농 배추 (1012) 인프런 강의 참고
 import sys
 sys.setrecursionlimit(10**6)
 
@@ -75,3 +75,41 @@ while T > 0:
                 answer +=1
     #결과 출력 (테스트 케이스 여러 종류이기 때문에 반복문 안에서 수행)
     print(answer)
+
+###백준 침투 (13565) <바이러스> 코드 참고
+
+import sys
+sys.setrecursionlimit(10**6)
+input = sys.stdin.readline
+M, N = map(int, input().split())
+graph = [[0] * (N+1)]
+visited = [[0] * (N+1) for _ in range(M+1)]
+
+for i in range(M):
+    temp = list(map(int, input().rstrip()))
+    temp.insert(0, 0)
+    graph.append(temp)
+
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+
+def dfs(x, y):
+    global graph, visited
+
+    visited[x][y] = 1
+    print(x, y)
+    for i in range(4):
+        newy = y + dy[i]
+        newx = x + dx[i]
+        if N >= newy > 0 and M >= newx > 0:
+            if not graph[newx][newy] and not visited[newx][newy]:
+                dfs(newx, newy)
+
+for i in range(1, N+1):
+    if not graph[1][i] and not visited[1][i]:
+        dfs(1, i)
+
+if 1 in visited[-1]:
+    print("YES")
+else:
+    print("NO")
