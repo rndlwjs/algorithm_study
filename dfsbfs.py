@@ -113,3 +113,43 @@ if 1 in visited[-1]:
     print("YES")
 else:
     print("NO")
+
+###백준 섬의개수 (4963)
+
+import sys
+sys.setrecursionlimit(10**6)
+input = sys.stdin.readline
+
+dx = [0, 0, -1, 1, -1, -1, 1, 1]
+dy = [-1, 1, 0, 0, 1, -1, 1, -1]
+
+def dfs(x, y):
+    global visited, map_, count, M, N
+    visited[x][y] = 1
+    #print("\t", x, y)
+    for i in range(8):
+        newx = x + dx[i]
+        newy = y + dy[i]
+        if 0 <= newx < N and 0 <= newy < M:
+            #print("i:",i," ", newx, newy)
+            if map_[newx][newy] and not visited[newx][newy]:
+                dfs(newx, newy)
+    
+
+while True:
+    M, N = map(int, input().split())
+    if M ==0 and N ==0: break
+    visited = [[0] * (M) for _ in range(N)]
+    map_ = []
+    count = 0
+    for _ in range(N):
+        list_ = list(map(int, input().split()))
+        map_.append(list_)
+    
+    for i in range(N): #M,N (5,4)로 입력 받지만, 행렬로 따지면 4X5이다. 
+        for j in range(M):
+            if map_[i][j] and not visited[i][j]:
+                dfs(i, j)
+                count += 1
+
+    print(count)
