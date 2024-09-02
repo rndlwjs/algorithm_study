@@ -153,3 +153,22 @@ while True:
                 count += 1
 
     print(count)
+
+### 프로그래머스 타겟넘버 (dfs)
+def dfs(index, sum):
+    global answer
+    if index == len(n):
+        if sum == t:
+            answer += 1
+        return
+
+    dfs(index+1, sum+n[index])
+    dfs(index+1, sum-n[index])
+
+def solution(numbers, target):
+    global n, t, answer
+    answer = 0
+    n = numbers
+    t = target
+    dfs(0, 0)
+    return answer
